@@ -112,7 +112,7 @@
                             value1 = "string";
                         }
                         if (value1.indexOf("<") !== -1 || value1.indexOf(">") !== -1) {
-                            value1 = value1.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                            value1 = value1.replace(/</g, "&amp;lt;").replace(/>/g, "&amp;gt;");
                           }
 
                         output += `<mxCell id="RH-` + id + `" value="- ` + key1 + `: ` + value1 + `" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="RH-` + parent_id + `">
@@ -129,7 +129,7 @@
                             value1 = "string";
                         }
                         if (value1.indexOf("<") !== -1 || value1.indexOf(">") !== -1) {
-                            value1 = value1.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                            value1 = value1.replace(/</g, "&amp;lt;").replace(/>/g, "&amp;gt;");
                           }
                         output += `<mxCell id="RH-` + id + `" value="+ set` + key1.charAt(0).toUpperCase() + key1.slice(1) + `(` + key1 + `: ` + value1 + `): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="RH-` + parent_id + `">
                                 <mxGeometry y="60" width="160" height="26" as="geometry" />
