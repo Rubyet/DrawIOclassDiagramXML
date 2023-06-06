@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
+
 <body>
     <div class="main">
         <div class="row">
@@ -38,38 +40,41 @@
         </div>
     </div>
 </body>
+
 </html>
 <script>
-    $(document).ready(function() {
-        $('#jsonToClass').click(function() {
+    $(document).ready(function () {
+        $('#jsonToClass').click(function () {
             var output = '';
             var id = 2;
             var parent_id = 2;
-                // Class definitions
-                var classDefinitions = jQuery("#json").val();
+            // Class definitions
+            var classDefinitions = jQuery("#json").val();
 
-                // Remove unwanted characters and indentation
-                var cleanedDefinitions = classDefinitions.replace(/public class /g, '').replace(/ {/g, '').replace(/\n\s*/g, '');
+            // Remove unwanted characters and indentation
+            var cleanedDefinitions = classDefinitions.replace(/public class /g, '').replace(/ {/g, '').replace(/\n\s*/g, '');
 
-                // Split the definitions into separate class blocks
-                var classBlocks = cleanedDefinitions.split('}');
+            // Split the definitions into separate class blocks
+            var classBlocks = cleanedDefinitions.split('}');
 
-                // Array to store the processed JSON strings
-                var jsonStrings = [];
+            // Array to store the processed JSON strings
+            var jsonStrings = [];
 
-                // Process each class block
-                $.each(classBlocks, function(index, classBlock) {
-                    if (classBlock.trim() !== '') {
+            // Process each class block
+            $.each(classBlocks, function (index, classBlock) {
+                if (classBlock.trim() !== '') {
                     // Extract class name
                     var className = classBlock.match(/(\w+)/)[1];
 
                     // Extract key-value pairs from the class block
-                    var keyValuePairs = classBlock.match(/public (\w+) (\w+);/g);
-
+                    var keyValuePairs = classBlock.match(/public (\w+<*\w*>*) (\w+);/g);
+                    console.log("here");
+                    console.log("<br&gt");
+                    console.log(keyValuePairs);
                     // Convert key-value pairs into an object
                     var jsonObject = {};
-                    $.each(keyValuePairs, function(index, pair) {
-                        var keyValuePair = pair.match(/public (\w+) (\w+);/);
+                    $.each(keyValuePairs, function (index, pair) {
+                        var keyValuePair = pair.match(/public (\w+<*\w*>*) (\w+);/);
                         var key = keyValuePair[2];
                         var value = keyValuePair[1];
                         jsonObject[key] = value;
@@ -78,65 +83,74 @@
                     // Convert the object to JSON string with indentation
                     var jsonString = JSON.stringify(jsonObject, null, 2);
 
-                    // Push the formatted JSON string with class name to the array
-                    jsonStrings.push('{"' + className + '": ' + jsonString+"}");
-                    }
-                });
+                    console.log(jsonString);
 
-                output += `<mxGraphModel dx="880" dy="476" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+                    // Push the formatted JSON string with class name to the array
+                    jsonStrings.push('{"' + className + '": ' + jsonString + "}");
+                }
+            });
+
+
+
+            output += `<mxGraphModel dx="880" dy="476" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
                     <root>
                       <mxCell id="RH-0">
                       </mxCell>
                       <mxCell id="RH-1" parent="RH-0">
                       </mxCell>`;
 
-                $.each(jsonStrings, function(index, value) {
-                    var jsonObject = JSON.parse(value);
-                    $.each(jsonObject, function(key, value) {
-                        parent_id = id;
-                        output += `<mxCell id="RH-`+id+`" value="`+key+`" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="RH-1">
+            $.each(jsonStrings, function (index, value) {
+                var jsonObject = JSON.parse(value);
+                $.each(jsonObject, function (key, value) {
+                    parent_id = id;
+                    output += `<mxCell id="RH-` + id + `" value="` + key + `" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="RH-1">
                             <mxGeometry x="580" y="210" width="160" height="112" as="geometry" />
                           </mxCell>`;
-                          id++;
-                          $.each(value, function(key1, value1) {
-                            if(value1 == "String")
-                            {
-                                value1 = "string";
-                            }
-                            output += `<mxCell id="RH-`+id+`" value="- `+key1+`: `+value1+`" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="RH-`+parent_id+`">
+                    id++;
+                    $.each(value, function (key1, value1) {
+                        if (value1 == "String") {
+                            value1 = "string";
+                        }
+                        if (value1.indexOf("<") !== -1 || value1.indexOf(">") !== -1) {
+                            value1 = value1.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                          }
+
+                        output += `<mxCell id="RH-` + id + `" value="- ` + key1 + `: ` + value1 + `" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="RH-` + parent_id + `">
                                 <mxGeometry y="26" width="160" height="26" as="geometry" />
                               </mxCell>`;
-                              id++;
-                        });
-                        output += `<mxCell id="RH-`+id+`" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="RH-`+parent_id+`">
-                            <mxGeometry y="52" width="160" height="8" as="geometry" />
-                          </mxCell>`;
-                          id++;
-                          $.each(value, function(key1, value1) {
-                            if(value1 == "String")
-                            {
-                                value1 = "string";
-                            }
-                            output += `<mxCell id="RH-`+id+`" value="+ set`+key1.charAt(0).toUpperCase() + key1.slice(1)+`(`+key1+`: `+value1+`): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="RH-`+parent_id+`">
-                                <mxGeometry y="60" width="160" height="26" as="geometry" />
-                              </mxCell>`;
-                              id++;
-                              output += `<mxCell id="RH-`+id+`" value="+ get`+key1.charAt(0).toUpperCase() + key1.slice(1)+`(): `+value1+`" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="RH-`+parent_id+`">
-                                <mxGeometry y="60" width="160" height="26" as="geometry" />
-                              </mxCell>`;
-                              id++;
-                        });
                         id++;
                     });
-                    
+                    output += `<mxCell id="RH-` + id + `" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="RH-` + parent_id + `">
+                            <mxGeometry y="52" width="160" height="8" as="geometry" />
+                          </mxCell>`;
+                    id++;
+                    $.each(value, function (key1, value1) {
+                        if (value1 == "String") {
+                            value1 = "string";
+                        }
+                        if (value1.indexOf("<") !== -1 || value1.indexOf(">") !== -1) {
+                            value1 = value1.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                          }
+                        output += `<mxCell id="RH-` + id + `" value="+ set` + key1.charAt(0).toUpperCase() + key1.slice(1) + `(` + key1 + `: ` + value1 + `): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="RH-` + parent_id + `">
+                                <mxGeometry y="60" width="160" height="26" as="geometry" />
+                              </mxCell>`;
+                        id++;
+                        output += `<mxCell id="RH-` + id + `" value="+ get` + key1.charAt(0).toUpperCase() + key1.slice(1) + `(): ` + value1 + `" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="RH-` + parent_id + `">
+                                <mxGeometry y="60" width="160" height="26" as="geometry" />
+                              </mxCell>`;
+                        id++;
+                    });
+                    id++;
                 });
-                output += `</root>
+
+            });
+            output += `</root>
                 </mxGraphModel>`;
-                $("#xml").val(output);
+            $("#xml").val(output);
 
         });
 
-        $('#json').focusout(function() {
+        $('#json').focusout(function () {
             prettyPrint();
         });
         function prettyPrint() {
@@ -146,8 +160,9 @@
             document.getElementById('json').value = pretty;
         }
 
-        
 
-      });
+
+    });
     // Recursive function to list all keys
 </script>
+
