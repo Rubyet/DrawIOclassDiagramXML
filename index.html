@@ -33,6 +33,22 @@
                         <label for="exampleFormControlTextarea1">DTO class diagram</label>
                         <textarea class="form-control" id="xml" rows="15"></textarea>
                     </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="setter">
+                        <label class="form-check-label" for="setter">Remove Setter</label>
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="getter">
+                        <label class="form-check-label" for="getter">Remove Getter</label>
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="radio" class="form-check-input" value="1" name="constructor" id="constructor11" checked>
+                        <label class="form-check-label" for="constructor11">Constructor (ArrayList)</label>
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="radio" class="form-check-input" value="2" name="constructor" id="constructor22">
+                        <label class="form-check-label" for="constructor22">Constructor (Traditional)</label>
+                    </div>
                 </form>
             </div>
             <div class="col-md-1">
@@ -44,7 +60,7 @@
 </html>
 <script>
     $(document).ready(function () {
-        $('#jsonToClass').click(function () {
+        function convertToXML(){
             var output = '';
             var id = 2;
             var parent_id = 2;
@@ -94,52 +110,93 @@
 
             output += `<mxGraphModel dx="880" dy="476" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
                     <root>
-                      <mxCell id="RH-0">
-                      </mxCell>
-                      <mxCell id="RH-1" parent="RH-0">
-                      </mxCell>`;
+                    <mxCell id="RH-0">
+                    </mxCell>
+                    <mxCell id="RH-1" parent="RH-0">
+                    </mxCell>`;
 
             $.each(jsonStrings, function (index, value) {
                 var jsonObject = JSON.parse(value);
                 $.each(jsonObject, function (key, value) {
+                    key = removeUnderscores(key);
                     parent_id = id;
+                    x = 580;
                     output += `<mxCell id="RH-` + id + `" value="` + key + `" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="RH-1">
-                            <mxGeometry x="580" y="210" width="160" height="112" as="geometry" />
-                          </mxCell>`;
+                            <mxGeometry x="` + id + `" y="210" width="160" height="112" as="geometry" />
+                        </mxCell>`;
                     id++;
                     $.each(value, function (key1, value1) {
+                        key1 = removeUnderscores(key1);
                         if (value1 == "String") {
                             value1 = "string";
                         }
                         if (value1.indexOf("<") !== -1 || value1.indexOf(">") !== -1) {
                             value1 = value1.replace(/</g, "&amp;lt;").replace(/>/g, "&amp;gt;");
-                          }
+                        }
 
                         output += `<mxCell id="RH-` + id + `" value="- ` + key1 + `: ` + value1 + `" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="RH-` + parent_id + `">
                                 <mxGeometry y="26" width="160" height="26" as="geometry" />
-                              </mxCell>`;
+                            </mxCell>`;
                         id++;
                     });
                     output += `<mxCell id="RH-` + id + `" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="RH-` + parent_id + `">
                             <mxGeometry y="52" width="160" height="8" as="geometry" />
-                          </mxCell>`;
+                        </mxCell>`;
+                    id++;
+                    if ($('input[name="constructor"]:checked').val() == 1) {
+                        
+                        if (!$('#setter').prop('checked')) {
+                            output += `<mxCell id="RH-` + id + `" value="+ `+ key +`(` + key.charAt(0).toLowerCase() + key.slice(1) + `: ArrayList)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="RH-` + parent_id + `">
+                                <mxGeometry y="60" width="160" height="26" as="geometry" />
+                            </mxCell>`;
+                        }
+                    }else{
+                        if (!$('#setter').prop('checked')) {
+                            constructorValues = '';
+                            $.each(value, function (key1, value1) {
+                                key1 = removeUnderscores(key1);
+                                if (value1 == "String") {
+                                    value1 = "string";
+                                }
+                                if (value1.indexOf("<") !== -1 || value1.indexOf(">") !== -1) {
+                                    value1 = value1.replace(/</g, "&amp;lt;").replace(/>/g, "&amp;gt;");
+                                }
+        
+                                constructorValues += key1 + `: ` + value1 + `, `;
+                            });
+                            output += `<mxCell id="RH-` + id + `" value="+ `+ key +`(`+constructorValues+`)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="RH-` + parent_id + `">
+                                <mxGeometry y="60" width="160" height="26" as="geometry" />
+                            </mxCell>`;
+                        }
+                    }
+                    
+                    
+                    
                     id++;
                     $.each(value, function (key1, value1) {
+                        key1 = removeUnderscores(key1);
                         if (value1 == "String") {
                             value1 = "string";
                         }
                         if (value1.indexOf("<") !== -1 || value1.indexOf(">") !== -1) {
                             value1 = value1.replace(/</g, "&amp;lt;").replace(/>/g, "&amp;gt;");
-                          }
-                        output += `<mxCell id="RH-` + id + `" value="+ set` + key1.charAt(0).toUpperCase() + key1.slice(1) + `(` + key1 + `: ` + value1 + `): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="RH-` + parent_id + `">
+                        }
+                        if (!$('#setter').prop('checked')) {
+                            output += `<mxCell id="RH-` + id + `" value="- set` + key1.charAt(0).toUpperCase() + key1.slice(1) + `(` + key1 + `: ` + value1 + `): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="RH-` + parent_id + `">
                                 <mxGeometry y="60" width="160" height="26" as="geometry" />
-                              </mxCell>`;
+                            </mxCell>`;
+                        }
+                        
                         id++;
-                        output += `<mxCell id="RH-` + id + `" value="+ get` + key1.charAt(0).toUpperCase() + key1.slice(1) + `(): ` + value1 + `" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="RH-` + parent_id + `">
+                        if (!$('#getter').prop('checked')) {
+                            output += `<mxCell id="RH-` + id + `" value="+ get` + key1.charAt(0).toUpperCase() + key1.slice(1) + `(): ` + value1 + `" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="RH-` + parent_id + `">
                                 <mxGeometry y="60" width="160" height="26" as="geometry" />
-                              </mxCell>`;
+                            </mxCell>`;
+                        }
+                        
                         id++;
                     });
+                    x=x+300;
                     id++;
                 });
 
@@ -147,8 +204,25 @@
             output += `</root>
                 </mxGraphModel>`;
             $("#xml").val(output);
-
+        }
+        function removeUnderscores(string) {
+            var words = string.split('_');
+            for (var i = 1; i < words.length; i++) {
+                words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1);
+            }
+            var result = words.join('');
+            return result;
+        }
+        $('#jsonToClass').click(function () {
+            convertToXML();
         });
+        $('input[type="checkbox"]').change(function() {
+            convertToXML();
+        });
+        $('input[type="radio"]').change(function() {
+            convertToXML();
+        });
+        
 
         $('#json').focusout(function () {
             prettyPrint();
