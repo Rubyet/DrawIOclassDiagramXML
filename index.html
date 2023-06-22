@@ -123,10 +123,18 @@
                 $.each(jsonObject, function (key, value) {
                     key = removeUnderscores(key);
                     parent_id = id;
+                    readonly = '&amp;nbsp;&lt;span style=&quot;font-weight: normal;&quot;&gt;{read only}&lt;/span&gt;';
                     x = 580;
-                    output += `<mxCell id="RH-` + id + `" value="` + key + `" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="RH-1">
+                    if ($('#setter').prop('checked')) {
+                        output += `<mxCell id="RH-` + id + `" value="` + key + `` + readonly + `" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="RH-1">
                             <mxGeometry x="` + id + `" y="210" width="160" height="112" as="geometry" />
                         </mxCell>`;
+                    }else{
+                        output += `<mxCell id="RH-` + id + `" value="` + key + `" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="RH-1">
+                            <mxGeometry x="` + id + `" y="210" width="160" height="112" as="geometry" />
+                        </mxCell>`;
+                    }
+                    
                     id++;
                     $.each(value, function (key1, value1) {
                         key1 = removeUnderscores(key1);
