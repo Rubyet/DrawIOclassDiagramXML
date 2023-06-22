@@ -1,0 +1,96 @@
+<mxGraphModel>
+    <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="2" value="PaymentGateways" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+            <mxGeometry x="-430" y="80" width="370" height="762" as="geometry"/>
+        </mxCell>
+        <mxCell id="3" value="- id: int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="2">
+            <mxGeometry y="26" width="370" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="4" value="- paymentAgencyCode: string" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="2">
+            <mxGeometry y="52" width="370" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="5" value="- paymentAgencyName: string" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="2">
+            <mxGeometry y="78" width="370" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="6" value="- microserviceEndpoint: string" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="2">
+            <mxGeometry y="104" width="370" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="7" value="- webhookEndpoint: string" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="2">
+            <mxGeometry y="130" width="370" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="8" value="- status: int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="2">
+            <mxGeometry y="156" width="370" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="9" value="- createdAt: date" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="2">
+            <mxGeometry y="182" width="370" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="10" value="- updatedAt: date" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="2">
+            <mxGeometry y="208" width="370" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="11" value="- deletedAt: date" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="2">
+            <mxGeometry y="234" width="370" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="12" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="2">
+            <mxGeometry y="260" width="370" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="13" value="+ PaymentGateways(paymentGateways: ArrayList)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="2">
+            <mxGeometry y="268" width="370" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="14" value="- setId(id: int): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="2">
+            <mxGeometry y="294" width="370" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="15" value="+ getId(): int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="2">
+            <mxGeometry y="320" width="370" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="16" value="- setPaymentAgencyCode(paymentAgencyCode: string): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="2">
+            <mxGeometry y="346" width="370" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="17" value="+ getPaymentAgencyCode(): string" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="2">
+            <mxGeometry y="372" width="370" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="18" value="- setPaymentAgencyName(paymentAgencyName: string): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="2">
+            <mxGeometry y="398" width="370" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="19" value="+ getPaymentAgencyName(): string" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="2">
+            <mxGeometry y="424" width="370" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="20" value="- setMicroserviceEndpoint(microserviceEndpoint: string): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="2">
+            <mxGeometry y="450" width="370" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="21" value="+ getMicroserviceEndpoint(): string" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="2">
+            <mxGeometry y="476" width="370" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="22" value="- setWebhookEndpoint(webhookEndpoint: string): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="2">
+            <mxGeometry y="502" width="370" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="23" value="+ getWebhookEndpoint(): string" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="2">
+            <mxGeometry y="528" width="370" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="24" value="- setStatus(status: int): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="2">
+            <mxGeometry y="554" width="370" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="25" value="+ getStatus(): int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="2">
+            <mxGeometry y="580" width="370" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="26" value="- setCreatedAt(createdAt: date): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="2">
+            <mxGeometry y="606" width="370" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="27" value="+ getCreatedAt(): date" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="2">
+            <mxGeometry y="632" width="370" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="28" value="- setUpdatedAt(updatedAt: date): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="2">
+            <mxGeometry y="658" width="370" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="29" value="+ getUpdatedAt(): date" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="2">
+            <mxGeometry y="684" width="370" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="30" value="- setDeletedAt(deletedAt: date): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="2">
+            <mxGeometry y="710" width="370" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="31" value="+ getDeletedAt(): date" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="2">
+            <mxGeometry y="736" width="370" height="26" as="geometry"/>
+        </mxCell>
+    </root>
+</mxGraphModel>
